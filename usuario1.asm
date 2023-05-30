@@ -1,4 +1,4 @@
-Universidad del Valle de Guatemala
+;Universidad del Valle de Guatemala
 ;Organización de computadoras y assembler
 ;Profesor Roger Diaz
 ;==================> Proyecto 4: par-impar <==================
