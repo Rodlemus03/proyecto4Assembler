@@ -13,7 +13,12 @@
 .stack 4096
 
 .data
-randN BYTE 0
+Dado byte 0
+;Variables etiqueta
+msg byte "Ingrese el nombre del usuario 1: ",0
+strBuff byte 255 DUP(?); Buffer para almacenar la cadena ingresada de maximo 255 caracteres
+fmt dword "%s",0
+
 
 .code
 includelib libucrt.lib
@@ -24,6 +29,30 @@ includelib libvcruntime.lib
 extrn printf:near
 extrn scanf:near
 extrn exit:near
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; SUBRUTINA PARA TIRAR LOS DADOS ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+TirarDados proc
+    mov ax, 0
+
+    mov ax, dx
+    xor dx, dx
+
+    mov cx, 6
+    div cx
+
+    add dl, 1
+
+    mov al, dl
+
+    and al, 0Fh
+
+    add al, '0'
+
+    mov Dado, dl
+
+    ret
+
+TirarDados endp
 
 inicio:
     push ebp
@@ -43,6 +72,20 @@ inicio:
 
     mov esp, ebp
     pop ebp
+    
+    
+    ;main
+    public main
+    main proc
+
+    jmp inicio
+    call TirarDados
+  
+    main endp
+    
+    
+    
+    
     
 end
 
