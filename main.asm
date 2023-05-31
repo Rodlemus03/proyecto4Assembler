@@ -7,3 +7,9 @@
 ;Nancy Mazariegos 22513
 ;Santiago Pereira 22318
 ;Monica Salvatierra 22249
+
+.data
+
+.code
+
+
