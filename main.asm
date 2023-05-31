@@ -6,7 +6,7 @@
 ;Mauricio Lemus 22461
 ;Nancy Mazariegos 22513
 ;Santiago Pereira 22318
-;Monica Salvatierra 22249
+;Mónica Salvatierra 22249
 
 .386
 .model flat, stdcall, c
@@ -63,6 +63,28 @@ TirarDados proc
 
 TirarDados endp
 
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; SUBRUTINA PARA COMPROBAR SI ES PAR O IMPAR ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+esPar proc
+    mov ax, dx       ; Mueve el número a verificar a ax
+    xor dx, dx       ; Clear a dx para poder realizar la división
+    mov cx, 2        ; Divide el valor por 2 para verificar si es par
+    div cx           ; Realiza la división
+    
+    cmp dx, 0        ; Compara el residuo de la división con 0
+    je Par           ; Si el residuo es 0, es par
+    jmp Impar        ; Si el residuo no es 0, es impar
+    
+ Par:
+    mov al, 'P'      ; Si es par, se le asigna 'P' a al
+    ret
+    
+ Impar:
+    mov al, 'I'       ; Si es impar, se le asigna 'I' a al
+    ret
+    
+esPar endp
+
+
 inicio:
     push ebp
     mov ebp, esp
@@ -95,6 +117,7 @@ inicio:
     call IncrementarContador
     call IncrementarContador
     call IncrementarContador
+    call esPar proc
     main endp
     
     
