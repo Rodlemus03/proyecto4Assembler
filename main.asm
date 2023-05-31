@@ -72,15 +72,16 @@ inicio:
 
     mov esp, ebp
     pop ebp
+    ret
     
     
     ;main
     public main
     main proc
 
-    jmp inicio
-    call TirarDados
+    ;jmp inicio
   
+    call TirarDados
     main endp
     
     
