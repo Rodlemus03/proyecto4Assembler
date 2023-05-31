@@ -25,4 +25,25 @@ extrn printf:near
 extrn scanf:near
 extrn exit:near
 
+inicio:
+    push ebp
+    mov ebp, esp
+
+    push offset msg 		; Imprimir mensaje
+    call printf
+
+    lea  eax, strBuff 		; Obtener dirección del buffer
+    push eax 				; Empujar dirección a la pila
+    push offset fmt 		; Empujar formato a la pila
+    call scanf 				; Leer cadena desde la entrada estándar
+
+   
+
+    add esp, 8 				; Limpiar la pila
+
+    mov esp, ebp
+    pop ebp
+    
+end
+
 
