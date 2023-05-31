@@ -13,6 +13,8 @@
 .stack 4096
 
 .data
+contadorGeneral word 0
+
 Dado byte 0
 ;Variables etiqueta
 msg byte "Ingrese el nombre del usuario 1: ",0
@@ -29,6 +31,13 @@ includelib libvcruntime.lib
 extrn printf:near
 extrn scanf:near
 extrn exit:near
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; SUBRUTINA PARA INCREMENTAR TURNO ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+IncrementarContador proc
+    add contadorGeneral, 1
+    ret
+IncrementarContador endp
+
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; SUBRUTINA PARA TIRAR LOS DADOS ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 TirarDados proc
@@ -82,6 +91,10 @@ inicio:
     ;jmp inicio
   
     call TirarDados
+    call IncrementarContador
+    call IncrementarContador
+    call IncrementarContador
+    call IncrementarContador
     main endp
     
     
