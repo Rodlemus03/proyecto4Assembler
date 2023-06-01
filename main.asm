@@ -120,7 +120,19 @@ inicio:
     call esPar proc
     main endp
     
-    
+   ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; SUBRUTINA PARA ELEGIR PAR O IMPAR ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+menuparimpar proc
+    lea eax, msgD
+    push eax
+    call printf
+
+    lea eax, resp
+    push eax
+    lea eax, fmt1
+    push eax
+    call scanf
+
+menuparimpar endp  
     
     
     
