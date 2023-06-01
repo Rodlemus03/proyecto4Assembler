@@ -136,6 +136,11 @@ menuparimpar proc
     call scanf
 
 menuparimpar endp  
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; SUBRUTINA PARA VERIFICAR NUMERO Y DESICION ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+verifdes proc
+        
+verifdes endp
     
     
     
