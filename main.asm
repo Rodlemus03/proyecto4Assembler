@@ -6,29 +6,24 @@
 ;Mauricio Lemus 22461
 ;Nancy Mazariegos 22513
 ;Santiago Pereira 22318
-;Mónica Salvatierra 22249
+;Monica Salvatierra 22249
 
 .386
 .model flat, stdcall, c
 .stack 4096
 
 .data
+contadorPosicionesJugador1 word 0
+contadorPosicionesJugador2 word 0
+
 contadorGeneral word 0
-resp dd 0 ;recibe la decision del usuario
-msgD byte "Elige '1' para numero impar o '2' para numero par:", 0 ;mensaje para la decision del usuario
-fmt1 db "%d",0
+
 
 Dado byte 0
 ;Variables etiqueta
 msg byte "Ingrese el nombre del usuario 1: ",0
 strBuff byte 255 DUP(?); Buffer para almacenar la cadena ingresada de maximo 255 caracteres
 fmt dword "%s",0
-
-;Mensajes
-msgCorrecto byte "¡Respuesta correcta! Avanza a la siguiente casilla.", 0
-msgIncorrecto byte "Respuesta incorrecta. Retrocede una casilla.", 0
-msgGanador byte "¡Felicidades! Has llegado hasta el final.", 0
-msgPerdedor byte "Has perdido. Retrocediste a la posición inicial y has elegido la respuesta incorrecta.", 0
 
 
 .code
@@ -41,11 +36,37 @@ extrn printf:near
 extrn scanf:near
 extrn exit:near
 
+
+
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; SUBRUTINA PARA INCREMENTAR POSICION J1 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+IncrementarPosicionJ1 proc
+    add contadorPosicionesJugador1, 1
+    ret
+IncrementarPosicionJ1 endp
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; SUBRUTINA PARA DECREMENTAR POSICION J1;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+DecrementarPosicionJ1 proc
+    sub contadorPosicionesJugador1, 1
+    ret
+DecrementarPosicionJ1 endp
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; SUBRUTINA PARA INCREMENTAR POSICION J2;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+IncrementarPosicionJ2 proc
+    add contadorPosicionesJugador2, 1
+    ret
+IncrementarPosicionJ2 endp
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; SUBRUTINA PARA DECREMENTAR POSICION J2;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+DecrementarPosicionJ2 proc
+    sub contadorPosicionesJugador2, 1
+    ret
+DecrementarPosicionJ2 endp
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; SUBRUTINA PARA INCREMENTAR TURNO ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 IncrementarContador proc
     add contadorGeneral, 1
     ret
 IncrementarContador endp
+
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; SUBRUTINA PARA TIRAR LOS DADOS ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -71,28 +92,6 @@ TirarDados proc
     ret
 
 TirarDados endp
-
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; SUBRUTINA PARA COMPROBAR SI ES PAR O IMPAR ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-esPar proc
-    mov ax, dx       ; Mueve el número a verificar a ax
-    xor dx, dx       ; Clear a dx para poder realizar la división
-    mov cx, 2        ; Divide el valor por 2 para verificar si es par
-    div cx           ; Realiza la división
-    
-    cmp dx, 0        ; Compara el residuo de la división con 0
-    je Par           ; Si el residuo es 0, es par
-    jmp Impar        ; Si el residuo no es 0, es impar
-    
- Par:
-    mov al, '2'      ; Si es par, se le asigna '2' a al
-    ret
-    
- Impar:
-    mov al, '1'       ; Si es impar, se le asigna '1' a al
-    ret
-    
-esPar endp
-
 
 inicio:
     push ebp
@@ -121,32 +120,34 @@ inicio:
 
     ;jmp inicio
   
+
+    ;Tirar dado generando random
     call TirarDados
+
+    ;Prueba llamar a las funciones de incremento
     call IncrementarContador
     call IncrementarContador
     call IncrementarContador
     call IncrementarContador
-    call esPar proc
+
+    ;Prueba llamar a los incrementos y decrementos del contador de posicion de jugador 1
+    call IncrementarPosicionJ1
+    call IncrementarPosicionJ1
+    call IncrementarPosicionJ1
+    call IncrementarPosicionJ1
+    call DecrementarPosicionJ1
+
+
+    ;Prueba llamar a los incrementos y decrementos del contador de posicion de jugador 2
+    call IncrementarPosicionJ2
+    call IncrementarPosicionJ2
+    call IncrementarPosicionJ2
+    call IncrementarPosicionJ2
+    call DecrementarPosicionJ2
+
     main endp
     
-   ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; SUBRUTINA PARA ELEGIR PAR O IMPAR ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-menuparimpar proc
-    lea eax, msgD
-    push eax
-    call printf
-
-    lea eax, resp
-    push eax
-    lea eax, fmt1
-    push eax
-    call scanf
-
-menuparimpar endp  
-
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; SUBRUTINA PARA VERIFICAR NUMERO Y DECISIÓN ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-verifdes proc
-        
-verifdes endp
+    
     
     
     
