@@ -182,9 +182,43 @@ menuparimpar proc
 
 menuparimpar endp  
 
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; SUBRUTINA PARA VERIFICAR NUMERO Y DESICION ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; SUBRUTINA PARA VERIFICAR NUMERO Y DECISION ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 verifdes proc
-        
+    cmp rep, Dado              ; Compara la respuesta del usuario con el número en el dado
+    je RespuestaCorrecta       ; Si el resultado coincide, salta a la etiqueta de 'RespuestaCorrecta'
+    jmp RespuestaIncorrecta    ; Si el resultado no coincide, salta a la etiqueta de 'RespuestaIncorrecta'
+
+RespuestaCorrecta:
+    push offset msgCorrecto    
+    call printf
+    add esp, 4                 ; Clear al stack
+    
+    cmp contadorGeneral, 1     ; Verificar el contador general para ver de quién es el turno
+    je AvanzarJ1
+    jne AvanzarJ2
+    
+    
+ RespuestaIncorrecta:
+    push offset msgIncorrecto
+    call printf
+    add esp, 4                 ; Clear al stack
+    
+    cmp contadorGeneral, 1
+    je RetrocederJ1
+    jne RetrocederJ2
+    
+ AvanzarJ1:
+    call IncrementarPosicionJ1
+    
+ Retroceder J1:
+    call DecrementarPosicionJ1
+    
+ AvanzarJ2:
+    call IncrementarPosicionJ2
+    
+ RetrocederJ2:
+    call DecrementarPosicionJ2
+    
 verifdes endp
     
     
