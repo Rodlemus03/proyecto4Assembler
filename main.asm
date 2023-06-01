@@ -10,7 +10,7 @@
 
 .386
 .model flat, stdcall, c
-.stack 4096
+.stack 4096 
 
 .data
 contadorPosicionesJugador1 word 0
@@ -18,13 +18,18 @@ contadorPosicionesJugador2 word 0
 
 contadorGeneral word 0
 
+resp dd 0 ;recibe la decision del usuario
+msgD byte "Elige 1 para numero impar o 2 para numero par:", 0 ;mensaje para la decision del usuario
+fmt1 db "%d",0
+
 
 Dado byte 0
 ;Variables etiqueta
 msg byte "Ingrese el nombre del usuario 1: ",0
+msg1 byte "Ingrese el nombre del usuario 2: ",0
 strBuff byte 255 DUP(?); Buffer para almacenar la cadena ingresada de maximo 255 caracteres
 fmt dword "%s",0
-
+msgN byte "Bienvenido al juego, deberan de indicar sus nombres primero:",0Ah,0
 
 .code
 includelib libucrt.lib
@@ -107,11 +112,33 @@ inicio:
 
    
 
-    add esp, 8 				; Limpiar la pila
+    add esp, 12 				; Limpiar la pila
 
     mov esp, ebp
     pop ebp
     ret
+
+inicio2:
+    push ebp
+    mov ebp, esp
+
+    push offset msg1 		; Imprimir mensaje
+    call printf
+
+    lea  eax, strBuff 		; Obtener dirección del buffer
+    push eax 				; Empujar dirección a la pila
+    push offset fmt 		; Empujar formato a la pila
+    call scanf 				; Leer cadena desde la entrada estándar
+
+   
+
+    add esp, 12			; Limpiar la pila
+
+    mov esp, ebp
+    pop ebp
+    ret
+
+
     
     ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; SUBRUTINA PARA COMPROBAR SI ES PAR O IMPAR ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 esPar proc
@@ -125,11 +152,11 @@ esPar proc
     jmp Impar        ; Si el residuo no es 0, es impar
     
  Par:
-    mov al, '2'      ; Si es par, se le asigna 'P' a al
+    mov al, '2'      ; Si es par, se le asigna '2' a al
     ret
     
  Impar:
-    mov al, '1'       ; Si es impar, se le asigna 'I' a al
+    mov al, '1'       ; Si es impar, se le asigna '1' a al
     ret
     
 esPar endp
@@ -155,38 +182,15 @@ verifdes endp
     
     
     
-    ;main
-    public main
-    main proc
+   
 
-    ;jmp inicio
-  
-
-    ;Tirar dado generando random
-    call TirarDados
-
-    ;Prueba llamar a las funciones de incremento
-    call IncrementarContador
-    call IncrementarContador
-    call IncrementarContador
-    call IncrementarContador
-
-    ;Prueba llamar a los incrementos y decrementos del contador de posicion de jugador 1
-    call IncrementarPosicionJ1
-    call IncrementarPosicionJ1
-    call IncrementarPosicionJ1
-    call IncrementarPosicionJ1
-    call DecrementarPosicionJ1
+main proc
 
 
-    ;Prueba llamar a los incrementos y decrementos del contador de posicion de jugador 2
-    call IncrementarPosicionJ2
-    call IncrementarPosicionJ2
-    call IncrementarPosicionJ2
-    call IncrementarPosicionJ2
-    call DecrementarPosicionJ2
+call inicio 
+call inicio2
 
-    main endp
+main endp
     
     
     
