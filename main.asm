@@ -18,7 +18,7 @@ contadorPosicionesJugador2 word 0
 
 contadorGeneral word 0
 
-resp dd 0 ;recibe la decision del usuario
+resp byte ? ;recibe la decision del usuario
 msgD byte "Elige 1 para numero impar o 2 para numero par:", 0 ;mensaje para la decision del usuario
 fmt1 db "%d",0
 
@@ -105,48 +105,6 @@ TirarDados proc
 
 TirarDados endp
 
-inicio:
-    push ebp
-    mov ebp, esp
-
-    push offset msg 		; Imprimir mensaje
-    call printf
-
-    lea  eax, strBuff 		; Obtener dirección del buffer
-    push eax 				; Empujar dirección a la pila
-    push offset fmt 		; Empujar formato a la pila
-    call scanf 				; Leer cadena desde la entrada estándar
-
-   
-
-    add esp, 12 				; Limpiar la pila
-
-    mov esp, ebp
-    pop ebp
-    ret
-
-inicio2:
-    push ebp
-    mov ebp, esp
-
-    push offset msg1 		; Imprimir mensaje
-    call printf
-
-    lea  eax, strBuff 		; Obtener dirección del buffer
-    push eax 				; Empujar dirección a la pila
-    push offset fmt 		; Empujar formato a la pila
-    call scanf 				; Leer cadena desde la entrada estándar
-
-   
-
-    add esp, 12			; Limpiar la pila
-
-    mov esp, ebp
-    pop ebp
-    ret
-
-
-    
     ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; SUBRUTINA PARA COMPROBAR SI ES PAR O IMPAR ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 esPar proc
     mov ax, dx       ; Mueve el número a verificar a ax
@@ -180,11 +138,15 @@ menuparimpar proc
     push eax
     call scanf
 
+    ret
+
 menuparimpar endp  
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; SUBRUTINA PARA VERIFICAR NUMERO Y DECISION ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 verifdes proc
-    cmp rep, Dado              ; Compara la respuesta del usuario con el número en el dado
+    mov al, resp
+    mov bl, Dado
+    cmp al, bl             ; Compara la respuesta del usuario con el número en el dado
     je RespuestaCorrecta       ; Si el resultado coincide, salta a la etiqueta de 'RespuestaCorrecta'
     jmp RespuestaIncorrecta    ; Si el resultado no coincide, salta a la etiqueta de 'RespuestaIncorrecta'
 
@@ -213,11 +175,14 @@ RespuestaCorrecta:
  RetrocederJ1:
     call DecrementarPosicionJ1
     
- AvanzarJ2:
+AvanzarJ2:
     call IncrementarPosicionJ2
     
  RetrocederJ2:
     call DecrementarPosicionJ2
+
+
+ret
     
 verifdes endp
     
@@ -227,16 +192,14 @@ verifdes endp
 
 main proc
 
-
-call inicio 
-call inicio2
+call menuparimpar
+;call TirarDados
+;call verifdes
 
 main endp
     
-    
+
     
     
     
 end
-
-
