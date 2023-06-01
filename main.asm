@@ -210,7 +210,7 @@ RespuestaCorrecta:
  AvanzarJ1:
     call IncrementarPosicionJ1
     
- Retroceder J1:
+ RetrocederJ1:
     call DecrementarPosicionJ1
     
  AvanzarJ2:
