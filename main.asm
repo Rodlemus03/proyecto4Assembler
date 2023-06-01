@@ -78,11 +78,11 @@ esPar proc
     jmp Impar        ; Si el residuo no es 0, es impar
     
  Par:
-    mov al, 'P'      ; Si es par, se le asigna 'P' a al
+    mov al, '2'      ; Si es par, se le asigna 'P' a al
     ret
     
  Impar:
-    mov al, 'I'       ; Si es impar, se le asigna 'I' a al
+    mov al, '1'       ; Si es impar, se le asigna 'I' a al
     ret
     
 esPar endp
