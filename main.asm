@@ -78,11 +78,11 @@ esPar proc
     jmp Impar        ; Si el residuo no es 0, es impar
     
  Par:
-    mov al, '2'      ; Si es par, se le asigna 'P' a al
+    mov al, '2'      ; Si es par, se le asigna '2' a al
     ret
     
  Impar:
-    mov al, '1'       ; Si es impar, se le asigna 'I' a al
+    mov al, '1'       ; Si es impar, se le asigna '1' a al
     ret
     
 esPar endp
@@ -137,7 +137,7 @@ menuparimpar proc
 
 menuparimpar endp  
 
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; SUBRUTINA PARA VERIFICAR NUMERO Y DESICION ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; SUBRUTINA PARA VERIFICAR NUMERO Y DECISIÓN ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 verifdes proc
         
 verifdes endp
