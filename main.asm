@@ -6,7 +6,7 @@
 ;Mauricio Lemus 22461
 ;Nancy Mazariegos 22513
 ;Santiago Pereira 22318
-;Monica Salvatierra 22249
+;Mónica Salvatierra 22249
 
 .386
 .model flat, stdcall, c
@@ -30,6 +30,13 @@ msg1 byte "Ingrese el nombre del usuario 2: ",0
 strBuff byte 255 DUP(?); Buffer para almacenar la cadena ingresada de maximo 255 caracteres
 fmt dword "%s",0
 msgN byte "Bienvenido al juego, deberan de indicar sus nombres primero:",0Ah,0
+
+;Mensajes
+msgCorrecto byte "¡Respuesta correcta! Avanza a la siguiente casilla.", 0
+msgIncorrecto byte "Respuesta incorrecta. Retrocede una casilla.", 0
+msgGanador byte "¡Felicidades! Has llegado hasta el final.", 0
+msgPerdedor byte "Has perdido. Retrocediste a la posición inicial y has elegido la respuesta incorrecta.", 0
+
 
 .code
 includelib libucrt.lib
