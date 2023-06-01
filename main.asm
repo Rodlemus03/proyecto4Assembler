@@ -14,6 +14,9 @@
 
 .data
 contadorGeneral word 0
+resp dd 0 ;recibe la decision del usuario
+msgD byte "Elige 1 para numero impar o 2 para numero par:", 0 ;mensaje para la decision del usuario
+fmt1 db "%d",0
 
 Dado byte 0
 ;Variables etiqueta
