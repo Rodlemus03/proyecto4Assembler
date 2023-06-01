@@ -140,6 +140,8 @@ menuparimpar proc
 
     ret
 
+    
+
 menuparimpar endp  
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; SUBRUTINA PARA VERIFICAR NUMERO Y DECISION ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -193,9 +195,11 @@ verifdes endp
 main proc
 
 call menuparimpar
-;call TirarDados
-;call verifdes
+call TirarDados
 
+
+
+call exit
 main endp
     
 
