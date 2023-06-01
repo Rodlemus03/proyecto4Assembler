@@ -15,7 +15,7 @@
 .data
 contadorGeneral word 0
 resp dd 0 ;recibe la decision del usuario
-msgD byte "Elige 1 para numero impar o 2 para numero par:", 0 ;mensaje para la decision del usuario
+msgD byte "Elige '1' para numero impar o '2' para numero par:", 0 ;mensaje para la decision del usuario
 fmt1 db "%d",0
 
 Dado byte 0
@@ -23,6 +23,12 @@ Dado byte 0
 msg byte "Ingrese el nombre del usuario 1: ",0
 strBuff byte 255 DUP(?); Buffer para almacenar la cadena ingresada de maximo 255 caracteres
 fmt dword "%s",0
+
+;Mensajes
+msgCorrecto byte "¡Respuesta correcta! Avanza a la siguiente casilla.", 0
+msgIncorrecto byte "Respuesta incorrecta. Retrocede una casilla.", 0
+msgGanador byte "¡Felicidades! Has llegado hasta el final.", 0
+msgPerdedor byte "Has perdido. Retrocediste a la posición inicial y has elegido la respuesta incorrecta.", 0
 
 
 .code
