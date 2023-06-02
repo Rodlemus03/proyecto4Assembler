@@ -8,9 +8,9 @@
 ;Santiago Pereira 22318
 ;Mónica Salvatierra 22249
 
-.386
-.model flat, stdcall, c
-.stack 4096 
+.386 ;se define el tipo de procesador
+.model flat, stdcall, c ; se define el tipo de memoria y llamado de funciones
+.stack 4096 ;espacio reservado en memoria
 
 .data
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; VARIABLES PARA REVISAR SI ES PAR O IMPAR ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -40,7 +40,6 @@ msgPerdedor byte "Has perdido. Retrocediste a la posición inicial y has elegido
 
 msg byte "Ingrese el nombre del usuario 1: ",0
 msg1 byte "Ingrese el nombre del usuario 2: ",0
-strBuff byte 255 DUP(?); Buffer para almacenar la cadena ingresada de maximo 255 caracteres
 fmt dword "%s",0
 msgN byte "Bienvenido al juego, deberan de indicar sus nombres primero:",0Ah,0
 
