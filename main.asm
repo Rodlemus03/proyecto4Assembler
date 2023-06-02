@@ -115,7 +115,7 @@ TirarDados proc
 TirarDados endp
 
     ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; SUBRUTINA PARA COMPROBAR SI ES PAR O IMPAR ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-    Descripción: Hace la verificación para comprobar si el número del dado es par o impar (Mónica)
+    ;Descripción: Hace la verificación para comprobar si el número del dado es par o impar (Mónica)
 esPar proc
     mov ax, dx       ; Mueve el número a verificar a ax
     xor dx, dx       ; Clear a dx para poder realizar la división
@@ -153,7 +153,7 @@ ret
 menuparimpar endp  
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; SUBRUTINA PARA VERIFICAR NUMERO Y DECISION ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-Descripción: Realiza una validación de la respuesta del usuario y el número del dado para ver si avanza o retrocede un espacio (Mónica)
+;Descripción: Realiza una validación de la respuesta del usuario y el número del dado para ver si avanza o retrocede un espacio (Mónica)
 verifdes proc
     mov al, resp            ;Mueve la respuesta del jugador a al
     mov bl, Dado            ;Mueve el número del dado a bl
