@@ -64,28 +64,28 @@ extrn exit:near
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; SUBRUTINA PARA INCREMENTAR POSICION J1 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 IncrementarPosicionJ1 proc
-    add contadorPosicionesJugador1, 1
+    add contadorPosicionesJugador1, 1 ;Incrementa en uno el contador
     ret
 IncrementarPosicionJ1 endp
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; SUBRUTINA PARA DECREMENTAR POSICION J1;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 DecrementarPosicionJ1 proc
-    sub contadorPosicionesJugador1, 1
+    sub contadorPosicionesJugador1, 1 ;Decrementa en uno el contador
     ret
 DecrementarPosicionJ1 endp
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; SUBRUTINA PARA INCREMENTAR POSICION J2;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 IncrementarPosicionJ2 proc
-    add contadorPosicionesJugador2, 1
+    add contadorPosicionesJugador2, 1;Incrementa en uno el contador
     ret
 IncrementarPosicionJ2 endp
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; SUBRUTINA PARA DECREMENTAR POSICION J2;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 DecrementarPosicionJ2 proc
-    sub contadorPosicionesJugador2, 1
+    sub contadorPosicionesJugador2, 1;Decrementa en uno el contador
     ret
 DecrementarPosicionJ2 endp
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; SUBRUTINA PARA INCREMENTAR TURNO ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 IncrementarContador proc
-    add contadorGeneral, 1
+    add contadorGeneral, 1 ;Incrementa en uno el contador
     ret
 IncrementarContador endp
 
@@ -158,12 +158,6 @@ menuparimpar endp
 verifdes proc
     mov al, resp
     mov bl, Dado
-
-    if resp es par:
-        banderaResp=1
-    if dado es par:
-        banderaDado=1
-
 
     mov cl, banderaRespuesta
     mov dl, banderaDado
