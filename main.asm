@@ -90,32 +90,32 @@ IncrementarContador proc
 IncrementarContador endp
 
 
-
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; SUBRUTINA PARA TIRAR LOS DADOS ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 TirarDados proc
-    mov ax, 0
+    mov ax, 0    ; Limpia ax
 
-    mov ax, dx
-    xor dx, dx
+    mov ax, dx   ; Mueve el valor a verificar en dx a ax
+    xor dx, dx   ; Clear a dx para poder realizar la división
 
-    mov cx, 6
-    div cx
+    mov cx, 6    ; Establece el divisor
+    div cx       ; Realiza la división entre ax y cx
 
-    add dl, 1
+    add dl, 1    ; Suma 1 al resultado para obtener un número aleatorio entre 1 y 6
 
-    mov al, dl
+    mov al, dl   ; El número obtenido es almacenando en al
 
-    and al, 0Fh
+    and al, 0Fh  ; Operación lógica entre al y '0Fh', que básicamente solo toma en cuenta los 4 bits menos significativos, de manera que el número generado por el dado esté dentro del rango establecido (1-6)
 
-    add al, '0'
+    add al, '0'  ; Convierte el número generado en su representación en ASCII sumándole el valor de cero
 
-    mov Dado, dl
+    mov Dado, dl : Guarda el número generado en la variable Dado
 
     ret
 
 TirarDados endp
 
     ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; SUBRUTINA PARA COMPROBAR SI ES PAR O IMPAR ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+    Descripción: Hace la verificación para comprobar si el número del dado es par o impar (Mónica)
 esPar proc
     mov ax, dx       ; Mueve el número a verificar a ax
     xor dx, dx       ; Clear a dx para poder realizar la división
@@ -148,19 +148,18 @@ menuparimpar proc
     push eax    ; Empuja la dirección en la pila
     call scanf  ; Llama a scanf para capturar el número ingresado
 
-    ret
-
-    
+ret
 
 menuparimpar endp  
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; SUBRUTINA PARA VERIFICAR NUMERO Y DECISION ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+Descripción: Realiza una validación de la respuesta del usuario y el número del dado para ver si avanza o retrocede un espacio (Mónica)
 verifdes proc
-    mov al, resp
-    mov bl, Dado
+    mov al, resp            ;Mueve la respuesta del jugador a al
+    mov bl, Dado            ;Mueve el número del dado a bl
 
-    mov cl, banderaRespuesta
-    mov dl, banderaDado
+    mov cl, banderaRespuesta  ; Mueve la bandera de respuesta a cl
+    mov dl, banderaDado       ; Mueve la bandera del dado a dl
 
     cmp cl, dl             ; Compara la respuesta del usuario con el número en el dado
     je RespuestaCorrecta       ; Si el resultado coincide, salta a la etiqueta de 'RespuestaCorrecta'
@@ -174,7 +173,6 @@ RespuestaCorrecta:
     cmp contadorGeneral, 1     ; Verificar el contador general para ver de quién es el turno
     je AvanzarJ1
     jne AvanzarJ2
-    
     
  RespuestaIncorrecta:
     push offset msgIncorrecto
@@ -196,16 +194,33 @@ AvanzarJ2:
     
  RetrocederJ2:
     call DecrementarPosicionJ2
+    
+ ; Verificar si se alcanzó la posición final (ganador)
+    cmp contadorPosicion, 10      ; Compara el contador de posición con el valor de la posición final
+    je Ganador                    ; Si son iguales, salta a la etiqueta de 'Ganador'
 
+    ; Verificar si se retrocedió a la posición inicial (perdedor)
+    cmp contadorPosicion, 0       ; Compara el contador de posición con el valor de la posición inicial
+    je Perdedor                   ; Si son iguales, salta a la etiqueta de 'Perdedor'
+
+    ret                          
+
+Ganador:
+    push offset msgGanador        ; Pone la dirección del mensaje '¡Felicidades! Has llegado al final del tablero.' en la pila
+    call printf                   ; Imprime el mensaje
+    add esp, 4                    ; Clear al stack
+    ret                          
+
+Perdedor:
+    push offset msgPerdedor       ; Pone la dirección del mensaje 'Has retrocedido a la posición inicial. ¡Perdiste!' en la pila
+    call printf                   ; Imprime el mensaje
+    add esp, 4                    ; Clear al stack
+    ret                          
 
 ret
     
 verifdes endp
     
-    
-    
-   
-
 main proc
 
 ;call menuparimpar
@@ -216,9 +231,5 @@ call verifdes
 
 call exit
 main endp
-    
-
-    
-    
     
 end
