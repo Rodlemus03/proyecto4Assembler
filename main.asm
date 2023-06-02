@@ -138,15 +138,15 @@ esPar endp
 
   ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; SUBRUTINA PARA ELEGIR PAR O IMPAR ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 menuparimpar proc
-    lea eax, msgD
-    push eax
-    call printf
+    lea eax, msgD ; Carga la dirección de la cadena de mensaje en eax
+    push eax ; Empuja la dirección en la pila
+    call printf ; Llama a printf para mostrar el mensaje
 
-    lea eax, resp
-    push eax
-    lea eax, fmt1
-    push eax
-    call scanf
+    lea eax, resp   ; Carga la dirección de la variable num en eax
+    push eax    ; Empuja la dirección en la pila
+    lea eax, fmt1   ; Carga la dirección de la cadena de formato en eax
+    push eax    ; Empuja la dirección en la pila
+    call scanf  ; Llama a scanf para capturar el número ingresado
 
     ret
 
